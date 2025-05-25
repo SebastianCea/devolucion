@@ -23,13 +23,13 @@ public class Devolucion {
     private String id_devolucion;
     
     @Column (length = 30, unique = true, nullable = false)
-    private String id_venta;
+    private String idVenta;
 
     @Column (length = 30, unique = true, nullable = false)
-    private String id_producto;
+    private String idProducto;
 
     @Column (length = 30, unique = true, nullable = false)
-    private String id_cliente;
+    private String idCliente;
 
     @Column (nullable = false)
     private LocalDate fecha_solicitud;
