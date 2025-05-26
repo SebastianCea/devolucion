@@ -22,6 +22,11 @@ public class DevolucionController {
     @Autowired
     private DevolucionService devolucionService;
 
+    @PostMapping
+    public Devolucion postDevolucion(@RequestBody Devolucion devolucion){
+        return devolucionService.guardarDevolucion(devolucion);
+    }
+
     @GetMapping
     public ResponseEntity<List<Devolucion>> getDevoluciones(){
         List<Devolucion> devoluciones=devolucionService.listarTodos();
@@ -41,7 +46,7 @@ public class DevolucionController {
         return devolucionService.eliminarDevolucion(id_devolucion);
     }
     
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<Devolucion> postDevolucion(@RequestBody Devolucion devolucion) {
         try {
             return new ResponseEntity<>(devolucionService.crearDevolucion(devolucion),HttpStatus.OK);
@@ -49,5 +54,5 @@ public class DevolucionController {
       
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-    }
+    }*/
 }

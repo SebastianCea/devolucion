@@ -22,14 +22,14 @@ public class Devolucion {
     @Id 
     private String id_devolucion;
     
-    @Column (length = 30, unique = true, nullable = false)
+    @Column (length = 100, unique = true, nullable = false)
     private String idVenta;
 
-    @Column (length = 30, unique = true, nullable = false)
+    @Column (length = 100, unique = true, nullable = false)
     private String idProducto;
 
-    @Column (length = 30, unique = true, nullable = false)
-    private String idCliente;
+    @Column (nullable = false)
+    private boolean tipo_documento;
 
     @Column (nullable = false)
     private LocalDate fecha_solicitud;
@@ -39,9 +39,6 @@ public class Devolucion {
 
     @Column (length = 50, nullable = false)
     private String estado;
-
-    @Column (length = 100, nullable = false)
-    private String comentario_cliente;
 
     @Column (nullable = false)
     private LocalDate fecha_resolucion;
