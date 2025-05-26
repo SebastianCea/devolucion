@@ -22,12 +22,24 @@ public class DevolucionService {
         return devolucionRepository.findAll();
     }
 
-    public Devolucion guardar(Devolucion devolucion){
+    public Devolucion guardarDevolucion(Devolucion devolucion){
         return devolucionRepository.save(devolucion);
     }
 
     public Devolucion devolucionxId(String id_devolucion){
         return devolucionRepository.getReferenceById(id_devolucion);
+    }
+
+    public String eliminarDevolucion(String id){
+        if(devolucionRepository.existsById(id)){
+            devolucionRepository.deleteById(id);
+            return "Devolucion eliminada";
+        }
+        return "No se encontró la devolucion";
+    }
+
+    public Devolucion buscarxIdDevolucion(String id){
+        return devolucionRepository.getReferenceById(id);
     }
 
     public Devolucion crearDevolucion(Devolucion devolucion) {
