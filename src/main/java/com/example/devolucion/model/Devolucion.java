@@ -28,6 +28,12 @@ public class Devolucion {
     @Column (length = 250, unique = true, nullable = false)
     private int id_producto;
 
+    @Column (length = 250, unique = true, nullable = false)
+    private int id_cliente;
+
+    @Column (length = 100, nullable = false)
+    private String correo_cliente;
+
     @Column (nullable = false)
     private boolean tipo_documento;
 
