@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,15 +55,31 @@ class DevolucionServiceTest {
     }
 
     @Test
-    void testEliminarDevolucion() {
-        // ID de devolución de ejemplo
+    void testEliminarDevolucion_CuandoExiste() {
+        
         String idDevolucion = "DEV12345";
+        when(devolucionRepository.existsById(idDevolucion)).thenReturn(true);
 
-        // Llamamos al método de servicio para eliminar
+        
         devolucionService.eliminarDevolucion(idDevolucion);
 
-        // Verificamos que el repositorio fue llamado para eliminar la devolución
+        
         verify(devolucionRepository).deleteById(idDevolucion);
     }
+
+    @Test
+    void testEliminarDevolucion_CuandoNoExiste() {
+        
+        String idDevolucion = "DEV99999";
+        when(devolucionRepository.existsById(idDevolucion)).thenReturn(false);
+
+        
+        devolucionService.eliminarDevolucion(idDevolucion);
+
+        
+        // Verificamos que NO se llamó al deleteById
+        verify(devolucionRepository, never()).deleteById(anyString());
+    }
+
 
 }
