@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Table (name = "Devolucion")
 public class Devolucion {
     @Id 
-    private String id_devolucion;
+    private int id_devolucion;
     
     @Column (length = 250, unique = true, nullable = false)
     private int id_venta;
@@ -53,6 +53,6 @@ public class Devolucion {
     private String resuelto_por;
 
     @Column (length = 250, unique = true, nullable = false)
-    private String id_soporte;
+    private int id_soporte;
 
 }

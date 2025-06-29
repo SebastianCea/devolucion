@@ -26,7 +26,7 @@ public class DevolucionService {
         return devolucionRepository.save(devolucion);
     }
 
-    public String eliminarDevolucion(String id){
+    public String eliminarDevolucion(int id){
         if(devolucionRepository.existsById(id)){
             devolucionRepository.deleteById(id);
             return "Devolucion eliminada";
@@ -34,8 +34,8 @@ public class DevolucionService {
         return "No se encontró la devolucion";
     }
 
-    public Devolucion buscarxIdDevolucion(String id){
-        return devolucionRepository.getReferenceById(id);
+    public Devolucion buscarxIdDevolucion(int id_devolucion){
+        return devolucionRepository.getReferenceById(id_devolucion);
     }
 
     /*public Devolucion crearDevolucion(Devolucion devolucion) {

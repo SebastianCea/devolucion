@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,8 +34,8 @@ class DevolucionServiceTest {
     /* Test para guardar devolucion en la capa servicio */
     @Test
     void testGuardarDevolucion() {
-        Devolucion devolucion = new Devolucion("DEV12345", 1001, 501, 300,"cliente@ejemplo.com",true,LocalDate.of(2023, 9, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 9, 15),"Juan Pérez", "SOP-001" );
-        Devolucion devolucionGuardada = new Devolucion("DEV12345", 1001, 501, 300,"cliente@ejemplo.com",true,LocalDate.of(2023, 9, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 9, 15),"Juan Pérez", "SOP-001" );
+        Devolucion devolucion = new Devolucion(1, 1001, 501, 300,"cliente@ejemplo.com",true,LocalDate.of(2023, 9, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 9, 15),"Juan Pérez", 001 );
+        Devolucion devolucionGuardada = new Devolucion(1, 1001, 501, 300,"cliente@ejemplo.com",true,LocalDate.of(2023, 9, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 9, 15),"Juan Pérez", 001 );
         when(devolucionRepository.save(devolucion)).thenReturn(devolucionGuardada);
 
         Devolucion resultado = devolucionService.guardarDevolucion(devolucion);
@@ -45,8 +45,8 @@ class DevolucionServiceTest {
 
     @Test
     void testListarDevoluciones() {
-        Devolucion d1 = new Devolucion("DEV12345", 1001, 501, 300,"cliente@ejemplo.com",true,LocalDate.of(2023, 9, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 9, 15),"Juan Pérez", "SOP-001" );
-        Devolucion d2 = new Devolucion("DEV12346", 1002, 502, 301,"cliente@ejemplo.cl",true,LocalDate.of(2023, 10, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 10, 16),"Juanito Pérez", "SOP-002" );
+        Devolucion d1 = new Devolucion(1, 1001, 501, 300,"cliente@ejemplo.com",true,LocalDate.of(2023, 9, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 9, 15),"Juan Pérez", 001 );
+        Devolucion d2 = new Devolucion(2, 1002, 502, 301,"cliente@ejemplo.cl",true,LocalDate.of(2023, 10, 1),"Producto defectuoso al recibirlo","PENDIENTE",LocalDate.of(2023, 10, 16),"Juanito Pérez", 002 );
         when(devolucionRepository.findAll()).thenReturn(Arrays.asList(d1, d2));
 
         List<Devolucion> resultado = devolucionService.listarTodos();
@@ -57,7 +57,7 @@ class DevolucionServiceTest {
     @Test
     void testEliminarDevolucion_CuandoExiste() {
         
-        String idDevolucion = "DEV12345";
+        int idDevolucion = 1;
         when(devolucionRepository.existsById(idDevolucion)).thenReturn(true);
 
         
@@ -70,7 +70,7 @@ class DevolucionServiceTest {
     @Test
     void testEliminarDevolucion_CuandoNoExiste() {
         
-        String idDevolucion = "DEV99999";
+        int idDevolucion = 1;
         when(devolucionRepository.existsById(idDevolucion)).thenReturn(false);
 
         
@@ -78,7 +78,7 @@ class DevolucionServiceTest {
 
         
         // Verificamos que NO se llamó al deleteById
-        verify(devolucionRepository, never()).deleteById(anyString());
+        verify(devolucionRepository, never()).deleteById(anyInt());
     }
 
 

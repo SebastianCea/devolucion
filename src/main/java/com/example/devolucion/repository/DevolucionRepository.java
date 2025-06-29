@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.example.devolucion.model.Devolucion;
 
 @Repository
-public interface DevolucionRepository extends JpaRepository<Devolucion, String> {
+public interface DevolucionRepository extends JpaRepository<Devolucion, Integer> {
     
 }

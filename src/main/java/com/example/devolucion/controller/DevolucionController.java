@@ -37,13 +37,13 @@ public class DevolucionController {
     }
 
     @GetMapping("/{id}")
-    public Devolucion getDevolucion(@PathVariable String id_devolucion){
-        return devolucionService.buscarxIdDevolucion(id_devolucion);
+    public Devolucion getDevolucion(@PathVariable int id){
+        return devolucionService.buscarxIdDevolucion(id);
     }
 
-    @DeleteMapping
-    public String deleteDevolucion(@PathVariable String id_devolucion){
-        return devolucionService.eliminarDevolucion(id_devolucion);
+    @DeleteMapping("/{id}")
+    public String deleteDevolucion(@PathVariable int id){
+        return devolucionService.eliminarDevolucion(id);
     }
     
     /*@PostMapping
