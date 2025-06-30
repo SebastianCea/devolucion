@@ -1,6 +1,7 @@
 package com.example.devolucion.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class DevolucionService {
         return "No se encontró la devolucion";
     }
 
-    public Devolucion buscarxIdDevolucion(int id_devolucion){
-        return devolucionRepository.getReferenceById(id_devolucion);
+    public Optional<Devolucion> buscarxIdDevolucion(int id_devolucion){
+        return devolucionRepository.findById(id_devolucion);
     }
 
     /*public Devolucion crearDevolucion(Devolucion devolucion) {

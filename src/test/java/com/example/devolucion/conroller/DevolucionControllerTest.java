@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.MediaType;
 
 
@@ -57,7 +59,8 @@ public class DevolucionControllerTest {
     public void testGetAllDevoluciones() throws Exception{
         when(devolucionService.listarTodos()).thenReturn(List.of(devolucion));
 
-        mockMvc.perform(get("/api/v1/devoluciones"))
+        mockMvc.perform(get("/api/v1/devoluciones")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id_devolucion").value(1))
                 .andExpect(jsonPath("$[0].id_cliente").value(300))
@@ -75,8 +78,18 @@ public class DevolucionControllerTest {
     }
 
     @Test
+    public void testGetAllDevolucionesEmpty() throws Exception {
+        when(devolucionService.listarTodos()).thenReturn(List.of());
+
+         mockMvc.perform(get("/api/v1/devoluciones")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+}
+
+
+    @Test
     public void testGetDevolucionById() throws Exception {
-        when(devolucionService.buscarxIdDevolucion(1)).thenReturn(devolucion);
+        when(devolucionService.buscarxIdDevolucion(1)).thenReturn(Optional.of(devolucion));
 
         mockMvc.perform(get("/api/v1/devoluciones/1"))
                 .andExpect(status().isOk())

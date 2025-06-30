@@ -1,6 +1,7 @@
 package com.example.devolucion.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class DevolucionController {
     }
 
     @GetMapping("/{id}")
-    public Devolucion getDevolucion(@PathVariable int id){
+    public Optional<Devolucion> getDevolucion(@PathVariable int id){
         return devolucionService.buscarxIdDevolucion(id);
     }
 
