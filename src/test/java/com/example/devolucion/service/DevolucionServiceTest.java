@@ -12,6 +12,7 @@ import com.example.devolucion.repository.DevolucionRepository;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -39,7 +40,7 @@ class DevolucionServiceTest {
         when(devolucionRepository.save(devolucion)).thenReturn(devolucionGuardada);
 
         Devolucion resultado = devolucionService.guardarDevolucion(devolucion);
-        assertThat(resultado.getId_devolucion()).isEqualTo("DEV12345");
+        assertThat(resultado.getId_devolucion()).isEqualTo(1);
         verify(devolucionRepository).save(devolucion);
     }
 
@@ -79,6 +80,21 @@ class DevolucionServiceTest {
         
         // Verificamos que NO se llamó al deleteById
         verify(devolucionRepository, never()).deleteById(anyInt());
+    }
+    @Test
+    void testBuscarPorId() {
+    int id = 1;
+    Devolucion devolucion = new Devolucion(id, 1001, 501, 300, "cliente@ejemplo.com", true,
+            LocalDate.of(2023, 9, 1), "Producto defectuoso al recibirlo", "PENDIENTE",
+            LocalDate.of(2023, 9, 15), "Juan Pérez", 1);
+
+    when(devolucionRepository.findById(id)).thenReturn(Optional.of(devolucion));
+
+    Optional<Devolucion> resultado = devolucionService.buscarxIdDevolucion(id);
+
+    assertThat(resultado).isPresent();
+    assertThat(resultado.get().getId_devolucion()).isEqualTo(id);
+    verify(devolucionRepository).findById(id);
     }
 
 

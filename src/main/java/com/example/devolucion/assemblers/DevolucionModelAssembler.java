@@ -15,6 +15,8 @@ public class DevolucionModelAssembler implements RepresentationModelAssembler<De
     public EntityModel<Devolucion> toModel(Devolucion devolucion) {
         return EntityModel.of(devolucion,
                 linkTo(methodOn(DevolucionControllerV2.class).getDevolucionById(devolucion.getId_devolucion())).withSelfRel(),
-                linkTo(methodOn(DevolucionControllerV2.class).getAllDevolucion()).withRel("devolucion"));
+                linkTo(methodOn(DevolucionControllerV2.class).getAllDevolucion()).withRel("devolucion"),
+                linkTo(methodOn(DevolucionControllerV2.class).createDevolucion(null)).withRel("Crear Devolucion"),
+                linkTo(methodOn(DevolucionControllerV2.class).deleteDevolucion(devolucion.getId_devolucion())).withRel("Eliminar Devolucion"));
 }
 }

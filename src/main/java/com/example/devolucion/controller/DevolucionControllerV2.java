@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,5 +62,10 @@ public class DevolucionControllerV2 {
                 .body(assembler.toModel(devolucion2));
     }
 
+    @DeleteMapping(value = "/{idDevolucion}", produces = MediaTypes.HAL_JSON_VALUE)
+    public ResponseEntity<?> deleteDevolucion(@PathVariable int idDevolucion) {
+        devolucionService.eliminarDevolucion(idDevolucion);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
 
 }
